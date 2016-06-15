@@ -4,48 +4,18 @@ require File.expand_path '../../helpers/helper', __FILE__
 
 rand_size = 1 + rand(1_000)
 
-describe 'custom character sets' do
-  custom_characters = %w(3 x A M p 1 e C h @ r $)
-  custom_string = OpenString.randomize(rand_size, custom_characters)
-
-  it 'generates a string using only the custom character set' do
-    assert_match(/[3xAMp1eCh@r$]+/, custom_string)
-  end
-
-  it 'cannot generate strings with any other characters' do
-    refute_match(/[^3xAMp1eCh@r$]+/, custom_string)
-  end
-end
-
-describe 'uppercase and lowercase character sets' do
-  upper_lower_string = OpenString.randomize(rand_size,
-                                            CharacterSets.uppercase,
-                                            CharacterSets.lowercase)
-
-  it 'may generate strings with lowercase letters' do
-    assert_match(/[a-z]?/, upper_lower_string)
-  end
-
-  it 'may generate strings with uppercase letters' do
-    assert_match(/[A-Z]?/, upper_lower_string)
-  end
-
-  it 'cannot generate strings with digits' do
-    refute_match(/\d/, upper_lower_string)
-  end
-
-  it 'cannot generate strings with non-word characters' do
-    refute_match(/\W/, upper_lower_string)
-  end
-
-  it 'cannot generate strings with underscores' do
-    refute_match(/_/, upper_lower_string)
-  end
-end
+all_string         = OpenString.randomize(rand_size, CharacterSets.all)
+custom_characters  = %w(3 x A M p 1 e C h @ r $)
+custom_string      = OpenString.randomize(rand_size, custom_characters)
+lowercase_string   = OpenString.randomize(rand_size, CharacterSets.lowercase)
+number_string      = OpenString.randomize(rand_size, CharacterSets.numbers)
+special_string     = OpenString.randomize(rand_size, CharacterSets.specials)
+upper_lower_string = OpenString.randomize(rand_size,
+                                          CharacterSets.uppercase,
+                                          CharacterSets.lowercase)
+uppercase_string   = OpenString.randomize(rand_size, CharacterSets.uppercase)
 
 describe 'all character sets' do
-  all_string = OpenString.randomize(rand_size, CharacterSets.all)
-
   it 'may generate strings with uppercase letters' do
     assert_match(/[a-z]?/, all_string)
   end
@@ -67,81 +37,17 @@ describe 'all character sets' do
   end
 end
 
-describe 'special character set' do
-  special_string = OpenString.randomize(rand_size, CharacterSets.specials)
-
-  it 'cannot generate strings with uppercase letters' do
-    refute_match(/[a-z]/, special_string)
+describe 'custom character sets' do
+  it 'generates a string using only the custom character set' do
+    assert_match(/[3xAMp1eCh@r$]+/, custom_string)
   end
 
-  it 'cannot generate strings with uppercase letters' do
-    refute_match(/[A-Z]/, special_string)
-  end
-
-  it 'cannot generate strings with digits' do
-    refute_match(/\d/, special_string)
-  end
-
-  it 'generates strings with non-word characters' do
-    assert_match(/\W/, special_string)
-  end
-
-  it 'may generate strings with underscores' do
-    assert_match(/_?/, special_string)
-  end
-end
-
-describe 'number character set' do
-  number_string = OpenString.randomize(rand_size, CharacterSets.numbers)
-
-  it 'cannot generate strings with uppercase letters' do
-    refute_match(/[a-z]/, number_string)
-  end
-
-  it 'cannot generate strings with uppercase letters' do
-    refute_match(/[A-Z]/, number_string)
-  end
-
-  it 'generates strings with digits' do
-    assert_match(/\d/, number_string)
-  end
-
-  it 'cannot generate strings with non-word characters' do
-    refute_match(/\W/, number_string)
-  end
-
-  it 'cannot generate strings with underscores' do
-    refute_match(/_/, number_string)
-  end
-end
-
-describe 'uppercase character set' do
-  uppercase_string = OpenString.randomize(rand_size, CharacterSets.uppercase)
-
-  it 'cannot generate strings with uppercase letters' do
-    refute_match(/[a-z]/, uppercase_string)
-  end
-
-  it 'generates strings with uppercase letters' do
-    assert_match(/[A-Z]/, uppercase_string)
-  end
-
-  it 'cannot generate strings with digits' do
-    refute_match(/\d/, uppercase_string)
-  end
-
-  it 'cannot generate strings with non-word characters' do
-    refute_match(/\W/, uppercase_string)
-  end
-
-  it 'cannot generate strings with underscores' do
-    refute_match(/_/, uppercase_string)
+  it 'cannot generate strings with any other characters' do
+    refute_match(/[^3xAMp1eCh@r$]+/, custom_string)
   end
 end
 
 describe 'lowercase character set' do
-  lowercase_string = OpenString.randomize(rand_size, CharacterSets.lowercase)
-
   it 'generates strings with lowercase characters' do
     assert_match(/[a-z]+/, lowercase_string)
   end
@@ -163,7 +69,95 @@ describe 'lowercase character set' do
   end
 end
 
-describe 'randomize' do
+describe 'number character set' do
+  it 'cannot generate strings with uppercase letters' do
+    refute_match(/[a-z]/, number_string)
+  end
+
+  it 'cannot generate strings with uppercase letters' do
+    refute_match(/[A-Z]/, number_string)
+  end
+
+  it 'generates strings with digits' do
+    assert_match(/\d/, number_string)
+  end
+
+  it 'cannot generate strings with non-word characters' do
+    refute_match(/\W/, number_string)
+  end
+
+  it 'cannot generate strings with underscores' do
+    refute_match(/_/, number_string)
+  end
+end
+
+describe 'special character set' do
+  it 'cannot generate strings with uppercase letters' do
+    refute_match(/[a-z]/, special_string)
+  end
+
+  it 'cannot generate strings with uppercase letters' do
+    refute_match(/[A-Z]/, special_string)
+  end
+
+  it 'cannot generate strings with digits' do
+    refute_match(/\d/, special_string)
+  end
+
+  it 'generates strings with non-word characters' do
+    assert_match(/\W/, special_string)
+  end
+
+  it 'may generate strings with underscores' do
+    assert_match(/_?/, special_string)
+  end
+end
+
+describe 'uppercase and lowercase character sets' do
+  it 'may generate strings with lowercase letters' do
+    assert_match(/[a-z]?/, upper_lower_string)
+  end
+
+  it 'may generate strings with uppercase letters' do
+    assert_match(/[A-Z]?/, upper_lower_string)
+  end
+
+  it 'cannot generate strings with digits' do
+    refute_match(/\d/, upper_lower_string)
+  end
+
+  it 'cannot generate strings with non-word characters' do
+    refute_match(/\W/, upper_lower_string)
+  end
+
+  it 'cannot generate strings with underscores' do
+    refute_match(/_/, upper_lower_string)
+  end
+end
+
+describe 'uppercase character set' do
+  it 'cannot generate strings with uppercase letters' do
+    refute_match(/[a-z]/, uppercase_string)
+  end
+
+  it 'generates strings with uppercase letters' do
+    assert_match(/[A-Z]/, uppercase_string)
+  end
+
+  it 'cannot generate strings with digits' do
+    refute_match(/\d/, uppercase_string)
+  end
+
+  it 'cannot generate strings with non-word characters' do
+    refute_match(/\W/, uppercase_string)
+  end
+
+  it 'cannot generate strings with underscores' do
+    refute_match(/_/, uppercase_string)
+  end
+end
+
+describe 'general randomize behavior' do
   it 'returns a string of the correct length' do
     (1..1_000).each do |n|
       str = OpenString.randomize(n, CharacterSets.lowercase)
