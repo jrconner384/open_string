@@ -1,0 +1,20 @@
+language: ruby
+
+rvm:
+- 2.3.0
+
+script:
+  - gem install simplecov
+  - gem install coveralls
+  - gem install fivemat
+  - rake test
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: rEeXdek7y7fP83ksIui/I5xi9XxyS/Apt5sD5naKYt8fRU3pHGFhzKHLNm+vH+wv2sV6jt7UTnArd9muO0iiqitWfQE4DCQ6mLd0xBOiBrw46tkVyx3xZdf2MGHmMfu1CzZAX2VV7Qj72PgCVBPIMrBubEqPVpavV5rXPqAtlwq7ffZJgNfLL0ldeS6Wa/kdR4N5r+tyE2YiZpg+YnpfUUmYu7k63cuGyva65+b3tyRbNFnHqJczEe1ZcpSaUM3aBA27f8zNY4u/cpSdxXcbFyAhPQw/pqLwOknx0fBr5rtgWar3wuQFi1GwzlzyFUKbO/TCRyJCyP7U5ukkQUeP2ya7lZgvQaDmPJRB1YhpUPOEdOC9+6CdPVMRHYTQD4wWVfbFI9iCLC8gMGZEMuRZGoFAvADVgAC5yPdNw70uz5Q24DW7n5a4nW9GH+YXgXagWtpjRMFYINtbZu9D1RiF5p1LcyWZ1ITp9BCM9A48YpN5OSmycd7GzCVy/BEqvsfxLSWuCPxy907V7cAhmaGcAaqp2a2Wf8dCSJHbvoMQuZHVbkm5XqlDc3OxOu3VeNyORukqVFHSj/fCp6tTY6tUPSPbHyKFzbDUO1TBHzQRmr7eO9RucNcwpxgPMC+c2dtLCLD10WDQt2Di2oZo3uT8PjHKVRNzqnBldBjbpU2HCDU=
+  gem: open_string
+  on:
+    tags: true
+    repo: jrconner384/open_string
+    branch: master
