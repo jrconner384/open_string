@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'open_string'
-  s.version     = '0.0.2'
+  s.version     = '0.0.3'
   s.date        = DateTime.now
   s.summary     = 'open_string'
   s.description = 'Various extensions for the String class'

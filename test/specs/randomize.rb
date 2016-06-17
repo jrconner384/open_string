@@ -16,38 +16,6 @@ upper_lower_string = String.randomize(rand_size,
                                       CharacterSets.lowercase)
 uppercase_string   = String.randomize(rand_size, CharacterSets.uppercase)
 
-describe 'all character sets' do
-  it 'may generate strings with uppercase letters' do
-    assert_match(/[a-z]?/, all_string)
-  end
-
-  it 'may generate strings with uppercase letters' do
-    assert_match(/[A-Z]?/, all_string)
-  end
-
-  it 'may generate strings with digits' do
-    assert_match(/\d?/, all_string)
-  end
-
-  it 'may generate strings with non-word characters' do
-    assert_match(/\W?/, all_string)
-  end
-
-  it 'may generate strings with underscores' do
-    assert_match(/_?/, all_string)
-  end
-end
-
-describe 'custom character sets' do
-  it 'generates a string using only the custom character set' do
-    assert_match(/[3xAMp1eCh@r$]+/, custom_string)
-  end
-
-  it 'cannot generate strings with any other characters' do
-    refute_match(/[^3xAMp1eCh@r$]+/, custom_string)
-  end
-end
-
 describe 'general randomize behavior' do
   it 'returns a string of the correct length' do
     (1..1_000).each do |n|
@@ -135,7 +103,39 @@ describe 'general randomize behavior' do
   end
 end
 
-describe 'lowercase character set' do
+describe 'randomize with all character sets' do
+  it 'may generate strings with uppercase letters' do
+    assert_match(/[a-z]?/, all_string)
+  end
+
+  it 'may generate strings with uppercase letters' do
+    assert_match(/[A-Z]?/, all_string)
+  end
+
+  it 'may generate strings with digits' do
+    assert_match(/\d?/, all_string)
+  end
+
+  it 'may generate strings with non-word characters' do
+    assert_match(/\W?/, all_string)
+  end
+
+  it 'may generate strings with underscores' do
+    assert_match(/_?/, all_string)
+  end
+end
+
+describe 'randomize with custom character sets' do
+  it 'generates a string using only the custom character set' do
+    assert_match(/[3xAMp1eCh@r$]+/, custom_string)
+  end
+
+  it 'cannot generate strings with any other characters' do
+    refute_match(/[^3xAMp1eCh@r$]+/, custom_string)
+  end
+end
+
+describe 'randomize with lowercase character set' do
   it 'generates strings with lowercase characters' do
     assert_match(/[a-z]+/, lowercase_string)
   end
@@ -157,7 +157,7 @@ describe 'lowercase character set' do
   end
 end
 
-describe 'number character set' do
+describe 'randomize with number character set' do
   it 'cannot generate strings with uppercase letters' do
     refute_match(/[a-z]/, number_string)
   end
@@ -179,7 +179,7 @@ describe 'number character set' do
   end
 end
 
-describe 'special character set' do
+describe 'randomize with special character set' do
   it 'cannot generate strings with uppercase letters' do
     refute_match(/[a-z]/, special_string)
   end
@@ -201,7 +201,7 @@ describe 'special character set' do
   end
 end
 
-describe 'uppercase and lowercase character sets' do
+describe 'randomize with uppercase and lowercase character sets' do
   it 'may generate strings with lowercase letters' do
     assert_match(/[a-z]?/, upper_lower_string)
   end
@@ -223,7 +223,7 @@ describe 'uppercase and lowercase character sets' do
   end
 end
 
-describe 'uppercase character set' do
+describe 'randomize with uppercase character set' do
   it 'cannot generate strings with uppercase letters' do
     refute_match(/[a-z]/, uppercase_string)
   end
