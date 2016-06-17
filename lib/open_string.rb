@@ -51,5 +51,6 @@ end
 
 # Public: Mixing OpenString extensions into String.
 class String
+  include OpenString
   extend OpenString::ClassMethods
 end
